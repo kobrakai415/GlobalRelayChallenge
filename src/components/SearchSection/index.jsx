@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Col } from 'react-bootstrap';
+import TweetContainer from '../TweetContainer';
+import './styles.css'
 
 const SearchSection = () => {
 
     const [query, setQuery] = useState("");
-    const [data, setData] = useState([])
+    const [tweets, setTweets] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
@@ -14,17 +16,16 @@ const SearchSection = () => {
         searchTweets()
     }, [debouncedQuery])
 
-
     const searchTweets = async () => {
         try {
             setLoading(true)
-            const response = await fetch(`http://localhost:3001/search/${debouncedQuery}`)
+            const response = await fetch(`http://localhost:3001/search/${debouncedQuery.length > 0 ? debouncedQuery : "apple"}`)
 
             if (response.status === 200) {
                 const data = await response.json()
                 console.log(data)
                 setLoading(false)
-                setData(data)
+                setTweets(data)
             } else {
                 setLoading(false)
                 setError(true)
@@ -49,8 +50,13 @@ const SearchSection = () => {
                     </svg>
                 </div>
 
-                
-                <div id="search-result-tweets">
+
+                <div className="search-result-tweets">
+
+                    {tweets.length > 0 ?
+                        tweets.map(tweet => <TweetContainer key={tweet.user.id} tweet={tweet} />)
+                        : null
+                    }
 
                 </div>
             </div>

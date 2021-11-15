@@ -1,18 +1,5 @@
 
-#search-bar {
-  border-radius: 500px;
-  height: 40px;
-  text-overflow: ellipsis;
-  width: 100%;
-  padding: 6px 48px;
-}
-
-#search-bar-parent {
-  position: relative;
-}
-.search-bar-glass {
-  position: absolute;
-  left: 17px;
-  top: 8px;
-  color: black;
+.App{
+  background-color: #F3F9FF;
+  min-height: 100vh;
 }
