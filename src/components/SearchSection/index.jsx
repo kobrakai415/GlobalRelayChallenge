@@ -3,7 +3,7 @@ import { Col } from 'react-bootstrap';
 import TweetContainer from '../TweetContainer';
 import './styles.css'
 
-const SearchSection = () => {
+const SearchSection = ({ setDraggedTweet }) => {
 
     const [query, setQuery] = useState("");
     const [tweets, setTweets] = useState([])
@@ -18,6 +18,7 @@ const SearchSection = () => {
 
     const searchTweets = async () => {
         try {
+            setTweets([])
             setLoading(true)
             const response = await fetch(`http://localhost:3001/search/${debouncedQuery.length > 0 ? debouncedQuery : "apple"}`)
 
@@ -41,8 +42,8 @@ const SearchSection = () => {
     return (
         <Col md={6}>
 
-            <div className="search-section">
-                <h3>Search</h3>
+            <div className="search-section position-relative h-100">
+
                 <div id="search-bar-parent">
                     <input id="search-bar" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Find a tweet ... " />
                     <svg className="search-bar-glass" viewBox="0 0 512 512" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
@@ -51,14 +52,19 @@ const SearchSection = () => {
                 </div>
 
 
-                <div className="search-result-tweets">
+                <div className="search-result-tweets h-100">
 
-                    {tweets.length > 0 ?
-                        tweets.map(tweet => <TweetContainer key={tweet.user.id} tweet={tweet} />)
+                    {tweets.length > 0 && !loading ?
+                        tweets.map(tweet => <TweetContainer key={tweet.id} tweet={tweet} setDraggedTweet={setDraggedTweet} />)
                         : null
                     }
 
                 </div>
+
+                {loading ? <img className="centered" src="/spinner.svg" height={250} width={250} alt="loader" /> : null}
+
+                {error ? <h3 className="centered">An error has occured, please try again!</h3> : null}
+                {query.length > 0 && tweets.length === 0 && !loading ? <h3 className="centered">No tweets found, please try another search term!</h3> : null}
             </div>
         </Col>
     );

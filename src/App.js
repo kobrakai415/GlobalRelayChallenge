@@ -1,19 +1,23 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row } from 'react-bootstrap';
 import SearchSection from './components/SearchSection';
 import SavedTweetsSection from './components/SavedTweetsSection';
+import Navbar from './components/Navbar';
 
 function App() {
+
+  const [draggedTweet, setDraggedTweet] = useState(null)
+
   return (
     <div className="App">
-      <Container >
-        <h1>Global Relay Tweet Saver</h1>
+        <Navbar />
+      <Container className="h-100" >
 
         <Row>
-          <SearchSection />
-          <SavedTweetsSection />
+          <SearchSection setDraggedTweet={setDraggedTweet} />
+          <SavedTweetsSection draggedTweet={draggedTweet} />
         </Row>
       </Container>
     </div>

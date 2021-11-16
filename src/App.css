@@ -1,5 +1,13 @@
-
-.App{
-  background-color: #F3F9FF;
+.App {
+  background-color: #f3f9ff;
   min-height: 100vh;
+}
+.saved-tweets-section {
+  height: 100%;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
