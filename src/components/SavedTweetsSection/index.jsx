@@ -38,7 +38,7 @@ const SavedTweetsSection = ({ draggedTweet }) => {
                 <div id="saved-tweets" className="mt-3">
                     {
                         savedTweets && savedTweets.length > 0 ?
-                            savedTweets.map(tweet => <SavedTweetContainer key={tweet.user.id} tweet={tweet} deleteTweet={deleteFromSavedTweets} />)
+                            savedTweets.map((tweet, index) => <SavedTweetContainer key={index} tweet={tweet} deleteTweet={deleteFromSavedTweets} />)
                             : null
                     }
                 </div>
