@@ -20,7 +20,7 @@ const SearchSection = ({ setDraggedTweet }) => {
         try {
             setTweets([])
             setLoading(true)
-            const response = await fetch(`http://localhost:3001/search/${debouncedQuery.length > 0 ? debouncedQuery : "apple"}`)
+            const response = await fetch(`https://git.heroku.com/global-relay-server.git/search/${debouncedQuery.length > 0 ? debouncedQuery : "apple"}`)
 
             if (response.status === 200) {
                 const data = await response.json()

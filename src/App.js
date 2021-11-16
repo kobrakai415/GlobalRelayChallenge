@@ -12,10 +12,10 @@ function App() {
 
   return (
     <div className="App">
-        <Navbar />
-      <Container className="h-100" >
+      <Navbar />
+      <Container >
 
-        <Row>
+        <Row style={{ minHeight: "100vh" }} >
           <SearchSection setDraggedTweet={setDraggedTweet} />
           <SavedTweetsSection draggedTweet={draggedTweet} />
         </Row>
