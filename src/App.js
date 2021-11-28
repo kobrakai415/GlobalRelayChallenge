@@ -14,8 +14,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Container >
-
-        <Row style={{ minHeight: "100vh" }} >
+        <Row >
           <SearchSection setDraggedTweet={setDraggedTweet} />
           <SavedTweetsSection draggedTweet={draggedTweet} />
         </Row>

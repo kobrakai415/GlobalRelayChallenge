@@ -1,2 +1,0 @@
-# GlobalRelayChallenge
- tech task

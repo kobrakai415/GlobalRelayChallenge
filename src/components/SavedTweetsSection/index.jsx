@@ -8,19 +8,22 @@ const SavedTweetsSection = ({ draggedTweet }) => {
 
     useEffect(() => {
         const tweets = JSON.parse(localStorage.getItem("savedTweets"))
-        console.log(tweets)
         if (tweets !== null) setSavedTweets(tweets)
-        console.log(tweets)
 
     }, []);
 
     const handleDrop = (e) => {
-        e.preventDefault()
-        console.log("dropped")
-        console.log(e)
-        const tweets = [...savedTweets, draggedTweet]
-        setSavedTweets(tweets)
-        localStorage.setItem("savedTweets", JSON.stringify(tweets))
+
+        const tweet = savedTweets.find(tweet => tweet.id === draggedTweet.id)
+
+        if (tweet) {
+
+        } else {
+            const tweets = [...savedTweets, draggedTweet]
+            setSavedTweets(tweets)
+            localStorage.setItem("savedTweets", JSON.stringify(tweets))
+        }
+
     }
 
     const deleteFromSavedTweets = (id) => {
@@ -33,12 +36,18 @@ const SavedTweetsSection = ({ draggedTweet }) => {
     return (
         <Col md={6}>
 
-            <div onDragOver={(e) => { console.log(e); e.preventDefault() }} onDrop={(e) => handleDrop(e)} className="saved-tweets-section">
+            <div
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => handleDrop(e)}
+                className="saved-tweets-section"
+                style={{ minHeight: "90vh" }}>
+
                 <h3>Saved Tweets</h3>
+
                 <div id="saved-tweets" className="mt-3">
                     {
                         savedTweets && savedTweets.length > 0 ?
-                            savedTweets.map((tweet, index) => <SavedTweetContainer key={index} tweet={tweet} deleteTweet={deleteFromSavedTweets} />)
+                            savedTweets.map((tweet, index) => <SavedTweetContainer key={tweet.id} tweet={tweet} deleteTweet={deleteFromSavedTweets} />)
                             : null
                     }
                 </div>
